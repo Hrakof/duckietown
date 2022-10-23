@@ -942,6 +942,11 @@ class Simulator(gym.Env):
 
         pos, angle_rad = self.weird_from_cartesian(pose)
 
+        # override positions with scaled ones
+        pos = [0, 0, 0]
+        pos[0] = desc['pos'][0] * tile_size
+        pos[2] = desc['pos'][1] * tile_size
+
         # c = self.cartesian_from_weird(pos, angle_rad)
         # logger.debug(desc=desc, pose=geometry.SE2.friendly(pose), weird=(pos, angle_rad),
         # c=geometry.SE2.friendly(c))

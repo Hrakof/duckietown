@@ -14,5 +14,5 @@ Gym-Duckietown is a car simulator environment, based on OpenAI Gym environments.
 
 ## Milestone 1
 ### Files
- -steps_milestone_1.txt : Documentation for the steps of the first Milestone.  
+ -steps_milestone_1.txt : Documentation for the steps of the first Milestone. **This file contains the link to the video of the running environment.**  
  -/gym-duckietown-daffy/custom_maps/my_map.yaml : Custom map for testing the agent of basic_control.py

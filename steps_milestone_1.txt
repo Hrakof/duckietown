@@ -7,11 +7,13 @@
 3.
 	Made some minor adjustments so the examples would work and tried out the "gym-duckietown-daffy/manual_control.py".
 	https://github.com/Hrakof/duckietown/commit/030419191ea95f81fd4af65b74005cf999784889
+    We could manually manoeuvre and test the environment on the streets of Duckietown.
 
 4.
 	Created a map to try the "gym-duckietown-daffy/exercises/basic_controls.py" with: gym-duckietown-daffy/custom_maps/my_map.yaml
-	The objects are not placed properly with the given coordinates even when using the given examples. We could not yet find what causes this error.
-
+    We added a custom road, and some Duckie pedestrians on the side as objects. Hitting them, or leaving the track will cause the episode to end.
+	The objects were not placed properly with the given coordinates even when using the given examples. This was caused by a scaling issue in the 'simulator.py' file, which we were able to fix. Now objects are placed in correct coordinates.
+    
 5. 
 	Ran the basic_conrols.py with the created map and recorded the result. The recording can be accessed here: https://drive.google.com/file/d/137RXOOYkt0bW-mpmrr6-S_RW3m2Mequi/view?usp=sharing
 	The recording was made with a phone because we could not run the simulation and a recording software at the same time.

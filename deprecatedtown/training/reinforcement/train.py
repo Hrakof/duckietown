@@ -22,7 +22,7 @@ def _train(args):
         os.makedirs(args.model_dir)
 
     # Launch the env with our helper function
-    env = launch_env()
+    env = launch_env(map_name='loop_empty')
     print("Initialized environment")
 
     # Wrappers

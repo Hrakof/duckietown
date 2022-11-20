@@ -51,10 +51,6 @@ class ResizeWrapper(gym.ObservationWrapper):
         self.shape = shape
 
     def observation(self, observation):
-
-        print('--------------------------')
-        print(observation.shape)
-        print(self.shape)
         return resize_image(observation, (self.shape[0], self.shape[1]), interpolation=INTER_CUBIC)
 
 

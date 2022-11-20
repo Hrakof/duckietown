@@ -76,14 +76,15 @@ def _train(args):
                     print("rewards at time {}: {}".format(total_timesteps, evaluations[-1]))
 
                     if args.save_models:
+                        print("saving")
                         policy.save(file_name="ddpg", directory=args.model_dir)
-                    np.savez("./results/rewards.npz", evaluations)
 
             # Reset environment
             env_counter += 1
             obs = env.reset()
             done = False
             episode_reward = 0
+            episode_timesteps = 0
             episode_num += 1
 
         # Select action randomly or according to policy
@@ -95,7 +96,6 @@ def _train(args):
                 action = (action + np.random.normal(0, args.expl_noise, size=env.action_space.shape[0])).clip(
                     env.action_space.low, env.action_space.high
                 )
-
         # Perform action
         new_obs, reward, done, _ = env.step(action)
 

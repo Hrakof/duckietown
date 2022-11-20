@@ -7,8 +7,8 @@ import numpy as np
 
 # Duckietown Specific
 from training.reinforcement.ddpg import DDPG
-from utils.env import launch_env
-from utils.wrappers import NormalizeWrapper, ImgWrapper, DtRewardWrapper, ActionWrapper, ResizeWrapper
+from training.utils.env import launch_env
+from training.utils.wrappers import NormalizeWrapper, ImgWrapper, DtRewardWrapper, ActionWrapper, ResizeWrapper
 
 
 def _enjoy():

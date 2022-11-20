@@ -20,10 +20,17 @@ Gym-Duckietown is a car simulator environment, based on OpenAI Gym environments.
 ## Milestone 2
  - Link to a trained model: https://drive.google.com/file/d/1mlSoV7zlqxo3Sd2Uw_nb0NOSbr9vLkjD/view?usp=sharing
 
-### Training with the gym
+### Training, option #1: with the gym
 We tried some training with the gym, you just have to `cd` into the `deprecatedtown/training` folder and then run
 `python reinforcement/train.py --model-dir=reinforcement/pytorch/models --max_timesteps=10000` you can play with the
 `max_timesteps` number freely.
 This uses the `DDPG` algorithm for the reinforcement learning.
 As you have seen in the video, it is truly not perfect, but our goal was just to make the training work because
 the duckietown-gym repo contains a lot of buggy and not runnable code.
+
+### Training, option #2: Stable Baselines3
+As an option for training, we have created the train_hw.ipynb file. Training is easier in an interactive notebook, because we can run cells individually. In this implementation we used the Stable Baselines3 library. For a reinforcement learning algorithm, we chose PPO with MlpPolicy.
+
+After the imports, a path for logging and model saving is defined. The environment is created with the helper function of Duckietown. This can be run without any parameters, or a map name to define the map for the environment. We had to create a new Image Wrapper, because the sequence of the data in the wrapper was wrong. Then, we had to create a model with the chosen algorithm and environment, then start the learning process. In the ```learn``` function we can define the number of training steps. At the end, the model is saved automatically to the defined ```model_path```. To check the results, we could use the ```evaluate_policy``` function of Stable Baselines3. We can simply change the map in in the ```launch_env``` helper function to evaluate in a different environment.
+
+We can also load already trained models with the ```PPO.load``` function, which needs the path to the model, and the environment passed as arguments. 

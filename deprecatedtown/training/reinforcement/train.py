@@ -77,7 +77,7 @@ def _train(args):
 
                     if args.save_models:
                         print("saving")
-                        policy.save(file_name="ddpg", directory=args.model_dir)
+                        policy.save(filename="ddpg", directory=args.model_dir)
 
             # Reset environment
             env_counter += 1

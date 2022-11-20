@@ -19,3 +19,11 @@ Gym-Duckietown is a car simulator environment, based on OpenAI Gym environments.
 
 ## Milestone 2
  - Link to a trained model: https://drive.google.com/file/d/1mlSoV7zlqxo3Sd2Uw_nb0NOSbr9vLkjD/view?usp=sharing
+
+### Training with the gym
+We tried some training with the gym, you just have to `cd` into the `deprecatedtown/training` folder and then run
+`python reinforcement/train.py --model-dir=reinforcement/pytorch/models --max_timesteps=10000` you can play with the
+`max_timesteps` number freely.
+This uses the `DDPG` algorithm for the reinforcement learning.
+As you have seen in the video, it is truly not perfect, but our goal was just to make the training work because
+the duckietown-gym repo contains a lot of buggy and not runnable code.

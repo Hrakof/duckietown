@@ -85,7 +85,7 @@ class ImgWrapper(gym.ObservationWrapper):
 
 class ImgWrapper2(gym.ObservationWrapper):
     def __init__(self, env=None):
-        super(ImgWrapper, self).__init__(env)
+        super(ImgWrapper2, self).__init__(env)
         obs_shape = self.observation_space.shape
         self.observation_space = spaces.Box(
             self.observation_space.low[0, 0, 0],

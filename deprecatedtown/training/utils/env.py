@@ -2,7 +2,7 @@ import gym
 import gym_duckietown
 
 
-def launch_env(id=None, map_name: str = "loop_empty"):
+def launch_env(id=None, map_name: str = "loop_empty", randomize_maps: bool = False):
     env = None
     if id is None:
         # Launch the environment
@@ -18,6 +18,7 @@ def launch_env(id=None, map_name: str = "loop_empty"):
             accept_start_angle_deg=4,  # start close to straight
             full_transparency=True,
             distortion=True,
+            randomize_maps_on_reset=randomize_maps,
         )
     else:
         env = gym.make(id)

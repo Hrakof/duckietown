@@ -3,6 +3,7 @@ import argparse
 import logging
 
 import os
+from typing import Dict, List
 import numpy as np
 
 # Duckietown Specific
@@ -10,6 +11,7 @@ from training.reinforcement.ddpg import DDPG
 from training.reinforcement.utils import seed, evaluate_policy, ReplayBuffer
 from training.utils.env import launch_env
 from training.utils.wrappers import NormalizeWrapper, ImgWrapper, DtRewardWrapper, ActionWrapper, ResizeWrapper
+from gym_duckietown.simulator import Simulator
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -22,7 +24,7 @@ def _train(args):
         os.makedirs(args.model_dir)
 
     # Launch the env with our helper function
-    env = launch_env(map_name='loop_empty')
+    env = launch_env(map_name='loop_empty', randomize_maps=True)
     print("Initialized environment")
 
     # Wrappers

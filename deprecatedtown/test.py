@@ -2,7 +2,6 @@
 This script allows you to manually control the simulator or Duckiebot
 using the keyboard arrows.
 """
-from PIL import Image
 import argparse
 import sys
 
@@ -56,7 +55,7 @@ action_dim = env.action_space.shape[0]
 max_action = float(env.action_space.high[0])
 
 policy = DDPG(state_dim, action_dim, max_action, net_type="cnn")
-policy.load(filename="ddpg", directory="model")
+policy.load(filename="ddpg", directory="model/test")
 
 
 obs = env.reset()

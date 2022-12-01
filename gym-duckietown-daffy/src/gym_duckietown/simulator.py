@@ -372,6 +372,14 @@ class Simulator(gym.Env):
 
         if self.randomize_maps_on_reset:
             self.map_names = os.listdir(get_subdir_path("maps"))
+            print(self.map_names)
+            print('---------------')
+            print('---------------')
+            print('---------------')
+            print('---------------')
+            print('---------------')
+            print('---------------')
+            print('---------------')
             self.map_names = [
                 _map for _map in self.map_names if not _map.startswith(("calibration", "regress"))
             ]
@@ -766,6 +774,7 @@ class Simulator(gym.Env):
         """
         Load the map layout from a YAML file
         """
+        print(f'-----map name:{map_name}')
 
         # Store the map name
         if os.path.exists(map_name) and os.path.isfile(map_name):

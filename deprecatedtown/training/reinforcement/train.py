@@ -11,7 +11,10 @@ from training.reinforcement.ddpg import DDPG
 from training.reinforcement.utils import seed, evaluate_policy, ReplayBuffer
 from training.utils.env import launch_env
 from training.utils.wrappers import NormalizeWrapper, ImgWrapper, DtRewardWrapper, ActionWrapper, ResizeWrapper
-from gym_duckietown.simulator import Simulator
+
+import random
+import gym
+from gym import Env
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -23,17 +26,14 @@ def _train(args):
     if not os.path.exists(args.model_dir):
         os.makedirs(args.model_dir)
 
-    # Launch the env with our helper function
-    env = launch_env(map_name='loop_empty', randomize_maps=True)
+    ids = [
+        'Duckietown-straight_road-v0',
+        'Duckietown-udem1-v0',
+        'Duckietown-small_loop-v0',
+    ]
+    env_list = make_envs(ids)
+    env = random.choice(env_list)
     print("Initialized environment")
-
-    # Wrappers
-    env = ResizeWrapper(env)
-    env = NormalizeWrapper(env)
-    env = ImgWrapper(env)  # to make the images from 160x120x3 into 3x160x120
-    env = ActionWrapper(env)
-    env = DtRewardWrapper(env)
-    print("Initialized Wrappers")
 
     # Set seeds
     seed(args.seed)
@@ -83,6 +83,7 @@ def _train(args):
 
             # Reset environment
             env_counter += 1
+            env = random.choice(env_list)
             obs = env.reset()
             done = False
             episode_reward = 0
@@ -119,6 +120,22 @@ def _train(args):
     print("Training done, about to save..")
     policy.save(filename="ddpg", directory=args.model_dir)
     print("Finished saving..should return now!")
+
+
+def make_envs(ids: List[str]) -> List[Env]:
+    result = []
+
+    for id in ids:
+        # Wrappers
+        env = gym.make(id)
+        env = ResizeWrapper(env)
+        env = NormalizeWrapper(env)
+        env = ImgWrapper(env)  # to make the images from 160x120x3 into 3x160x120
+        env = ActionWrapper(env)
+        env = DtRewardWrapper(env)
+        result.append(env)
+
+    return result
 
 
 if __name__ == "__main__":

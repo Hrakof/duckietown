@@ -1,5 +1,6 @@
 from typing import List
 import gym
+import gym_duckietown
 
 from wrappers import (
     NormalizeWrapper,

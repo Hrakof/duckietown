@@ -1,24 +1,13 @@
-import pickle
 import random
-import resource
-import gym_duckietown
 import numpy as np
 import torch
-import gym
 import os
 
 from args import get_ddpg_args_train
 from ddpg import DDPG
 from utils import seed, evaluate_policy, ReplayBuffer
-from wrappers import (
-    NormalizeWrapper,
-    ImgWrapper,
-    DtRewardWrapper,
-    ActionWrapper,
-    ResizeWrapper,
-    SteeringToWheelVelWrapper,
-)
-from env import launch_env
+
+from env import launch_env, make_envs
 
 policy_name = "DDPG"
 
@@ -50,7 +39,17 @@ if not os.path.exists("./results"):
 if args.save_models and not os.path.exists("./pytorch_models"):
     os.makedirs("./pytorch_models")
 
-env = launch_env()
+
+ids = [
+    'Duckietown-straight_road-v0',
+    'Duckietown-4way-v0',
+    'Duckietown-udem1-v0',
+    'Duckietown-small_loop-v0',
+    'Duckietown-small_loop_cw-v0',
+    'Duckietown-zigzag_dists-v0',
+]
+env_list = make_envs(ids)
+env = random.choice(env_list)
 
 # Set seeds
 seed(args.seed)
@@ -99,6 +98,7 @@ while total_timesteps < args.max_timesteps:
 
         # Reset environment
         env_counter += 1
+        env = random.choice(env_list)
         obs = env.reset()
         done = False
         episode_reward = 0

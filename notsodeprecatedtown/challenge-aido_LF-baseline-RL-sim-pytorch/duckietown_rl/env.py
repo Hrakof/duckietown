@@ -1,3 +1,4 @@
+from typing import List
 import gym
 
 from wrappers import (
@@ -38,3 +39,19 @@ def launch_env(id=None):
     # env = DtRewardWrapper(env)
 
     return env
+
+def make_envs(ids: List[str]) -> List[gym.Env]:
+    result = []
+
+    for id in ids:
+        # Wrappers
+        env = gym.make(id)
+        env = ResizeWrapper(env)
+        env = NormalizeWrapper(env)
+        env = ImgWrapper(env)  # to make the images from 160x120x3 into 3x160x120
+        env = SteeringToWheelVelWrapper(env)
+        env = ActionWrapper(env)
+        # env = DtRewardWrapper(env)
+        result.append(env)
+
+    return result

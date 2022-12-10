@@ -1,6 +1,5 @@
 from typing import List
 import gym
-import gym_duckietown
 
 from wrappers import (
     NormalizeWrapper,
@@ -43,10 +42,23 @@ def launch_env(id=None):
 
 def make_envs(ids: List[str]) -> List[gym.Env]:
     result = []
+    from gym_duckietown.simulator import Simulator
 
     for id in ids:
+        
+        env = Simulator(
+            seed=123,  # random seed
+            map_name=id,
+            max_steps=500001,  # we don't want the gym to reset itself
+            domain_rand=False,
+            camera_width=640,
+            camera_height=480,
+            accept_start_angle_deg=4,  # start close to straight
+            full_transparency=True,
+            distortion=True,
+        )
+
         # Wrappers
-        env = gym.make(id)
         env = ResizeWrapper(env)
         env = NormalizeWrapper(env)
         env = ImgWrapper(env)  # to make the images from 160x120x3 into 3x160x120
@@ -56,3 +68,29 @@ def make_envs(ids: List[str]) -> List[gym.Env]:
         result.append(env)
 
     return result
+
+
+def make_env(id: str) -> gym.Env:
+    from gym_duckietown.simulator import Simulator
+
+    env = Simulator(
+        seed=123,  # random seed
+        map_name=id,
+        max_steps=500001,  # we don't want the gym to reset itself
+        domain_rand=False,
+        camera_width=640,
+        camera_height=480,
+        accept_start_angle_deg=4,  # start close to straight
+        full_transparency=True,
+        distortion=False,
+    )
+
+    # Wrappers
+    env = ResizeWrapper(env)
+    env = NormalizeWrapper(env)
+    env = ImgWrapper(env)  # to make the images from 160x120x3 into 3x160x120
+    env = SteeringToWheelVelWrapper(env)
+    env = ActionWrapper(env)
+    # env = DtRewardWrapper(env)
+
+    return env

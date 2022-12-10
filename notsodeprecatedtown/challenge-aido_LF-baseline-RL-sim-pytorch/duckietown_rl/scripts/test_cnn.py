@@ -1,9 +1,18 @@
+import random
 import numpy as np
 import torch
 from args import get_ddpg_args_test
 
 from ddpg import DDPG
-from env import launch_env
+from env import make_env
+from PIL import Image
+import argparse
+import sys
+
+import gym
+import numpy as np
+import pyglet
+from pyglet.window import key
 
 import pyglet
 from pyglet.window import key
@@ -17,7 +26,15 @@ args = get_ddpg_args_test()
 
 file_name = "{}_{}".format(policy_name, args.seed)
 
-env = launch_env()
+iids = [
+    'straight_road',
+    '4way',
+    'udem1',
+    'small_loop',
+    'small_loop_cw',
+    'zigzag_dists',
+]
+env = make_env('4way')
 
 state_dim = env.observation_space.shape
 action_dim = env.action_space.shape[0]

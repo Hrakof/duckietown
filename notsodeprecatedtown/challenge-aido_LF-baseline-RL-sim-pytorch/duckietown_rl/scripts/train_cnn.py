@@ -41,12 +41,12 @@ if args.save_models and not os.path.exists("./pytorch_models"):
 
 
 ids = [
-    'Duckietown-straight_road-v0',
-    'Duckietown-4way-v0',
-    'Duckietown-udem1-v0',
-    'Duckietown-small_loop-v0',
-    'Duckietown-small_loop_cw-v0',
-    'Duckietown-zigzag_dists-v0',
+    'straight_road',
+    '4way',
+    'udem1',
+    'small_loop',
+    'small_loop_cw',
+    'zigzag_dists',
 ]
 env_list = make_envs(ids)
 env = random.choice(env_list)

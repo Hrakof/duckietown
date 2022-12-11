@@ -36,6 +36,18 @@ After the imports, a path for logging and model saving is defined. The environme
 We can also load already trained models with the ```PPO.load``` function, which needs the path to the model, and the environment passed as arguments. 
 
 ## Milestone 3
+### DDPG
 We could not achieve great results training with DDPG. The trained models drive almost entirely straight when trained for a short time and start to spin in one place and never move when trained for longer. Setting the time spent taking random actions before learning longer did not improve the situation.
 
 The best performing model mostly spins in one place but in some situations it moves a bit along the road. The model can be found in the [ddpg_best](https://github.com/Hrakof/duckietown/tree/milestone_3/ddpg_best) folder. A video is available [here](https://drive.google.com/file/d/1leOpowgnSdQ6jkxr18vh6QKribBWjlGY/view?fbclid=IwAR10cEzXAnouTQdoKY8OhtkxW5jVldH2gyvEGyaiCZz6XQS4WNCzR1eML5Q) about how the model performs.
+
+### Environment and training/testing
+1. Install the [gym-duckietown](https://github.com/duckietown/gym-duckietown) package. Steps are described in the README of the repository.
+2. Downgrade 2 python packages:
+    - pip install pyglet==1.5.27
+    - pip install gym==0.25.2
+3. [Install pytorch.](https://pytorch.org/get-started/locally/)
+4. In the deprecatedtown folder:
+    - pip install -e .
+
+The train.py and test.py files in the deprecatedtown folder can be used to train and test models.

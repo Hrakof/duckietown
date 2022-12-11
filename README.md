@@ -34,3 +34,8 @@ As an option for training, we have created the train_hw.ipynb file. Training is 
 After the imports, a path for logging and model saving is defined. The environment is created with the helper function of Duckietown. This can be run without any parameters, or a map name to define the map for the environment. We had to create a new Image Wrapper, because the sequence of the data in the wrapper was wrong. Then, we had to create a model with the chosen algorithm and environment, then start the learning process. In the ```learn``` function we can define the number of training steps. At the end, the model is saved automatically to the defined ```model_path```. To check the results, we could use the ```evaluate_policy``` function of Stable Baselines3. We can simply change the map in in the ```launch_env``` helper function to evaluate in a different environment.
 
 We can also load already trained models with the ```PPO.load``` function, which needs the path to the model, and the environment passed as arguments. 
+
+## Milestone 3
+We could not achieve great results training with DDPG. The trained models drive almost entirely straight when trained for a short time and start to spin in one place and never move when trained for longer. Setting the time spent taking random actions before learning longer did not improve the situation.
+
+The best performing model mostly spins in one place but in some situations it moves a bit along the road. The model can be found in the [ddpg_best](https://github.com/Hrakof/duckietown/tree/milestone_3/ddpg_best) folder. A video is available [here](https://drive.google.com/file/d/1leOpowgnSdQ6jkxr18vh6QKribBWjlGY/view?fbclid=IwAR10cEzXAnouTQdoKY8OhtkxW5jVldH2gyvEGyaiCZz6XQS4WNCzR1eML5Q) about how the model performs.
